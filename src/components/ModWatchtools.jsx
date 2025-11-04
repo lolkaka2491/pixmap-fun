@@ -1250,9 +1250,10 @@ function PixelVisualiser({ canvasId, canvases }) {
       <p><strong>Visualise pixels in an area</strong></p>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <p>IID: <input value={iid} onChange={e => setIid(e.target.value)} placeholder="xxxx-xxxxx-xxxx" /></p>
-      <p>Top-left corner: <input value={tl} onChange={e => setTl(e.target.value)} placeholder="X_Y" /></p>
-      <p>Bottom-right corner: <input value={br} onChange={e => setBr(e.target.value)} placeholder="X_Y" /></p>
+      <p>Top-left corner: <input value={tl} onChange={e => { let co = e.target.value.trim(); if (co) { const coords = coordsFromString(co); if (coords) { co = coords.join('_'); e.target.value = co; } } setTl(co); }} placeholder="X_Y or URL" /></p>
+      <p>Bottom-right corner: <input value={br} onChange={e => { let co = e.target.value.trim(); if (co) { const coords = coordsFromString(co); if (coords) { co = coords.join('_'); e.target.value = co; } } setBr(co); }} placeholder="X_Y or URL" /></p>
       <p>Since: <input value={since} onChange={e => setSince(e.target.value)} placeholder="1d" /></p>
+
       <p>
         <label>
           <input type="checkbox" ref={lineToggleRef} /> Show red lines
